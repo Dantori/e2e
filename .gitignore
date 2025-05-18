@@ -1,0 +1,67 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+target/
+
+# Maven
+.mvn/
+log/
+!**/src/main/**/log/
+target/
+dependency-reduced-pom.xml
+build/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Spring Boot
+*.war
+*.jar
+*.log
+
+# Liquibase
+liquibase/changelog/*.xml.zip
+liquibase/changelog/*.json.zip
+liquibase/changelog/*.yml.zip
+liquibase/snapshots/
+
+# H2 Database
+*.db
+*.h2.db
+*.mv.db
+*.trace.db
+*.lock.db
+
+# Logs and temp files
+*.log
+*.tmp
+hs_err_pid*
+*.pid
+*.gz
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Lombok generated files
+.lombok/
+
+# Ignore classpath and local settings
+.classpath
+.project
+.settings/
+
+# Test reports
+test-output/
+surefire-reports/
+
+# User-specific files
+.env
+*.env
+
