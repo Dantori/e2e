@@ -15,7 +15,7 @@ pipeline {
 
             stage('Build') {
                 steps {
-                    bat 'mvn clean package'
+                    bat 'mvn clean package -DskipTests'
                 }
             }
 
@@ -25,9 +25,15 @@ pipeline {
                 }
             }
 
-            stage('Archive Artifacts') {
+            stage('Allure Report Generation') {
                 steps {
-                    archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
+                    bat 'mvn allure:report'
+                }
+            }
+
+            stage('Archive Allure Results') {
+                steps {
+                    archiveArtifacts artifacts: 'target/allure-results/**', allowEmptyArchive: true
                 }
             }
         }
@@ -38,6 +44,9 @@ pipeline {
             }
             failure {
                 echo '❌ Сборка завершилась с ошибками!'
+            }
+            always {
+                publishAllure reportBuildPolicy: 'ALWAYS', results: [[path: 'target/allure-results']]
             }
         }
 }
