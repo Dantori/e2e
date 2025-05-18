@@ -30,12 +30,6 @@ pipeline {
                     bat 'mvn allure:report'
                 }
             }
-
-            stage('Archive Allure Results') {
-                steps {
-                    archiveArtifacts artifacts: 'target/allure-results/**', allowEmptyArchive: true
-                }
-            }
         }
 
         post {
@@ -46,7 +40,13 @@ pipeline {
                 echo '❌ Сборка завершилась с ошибками!'
             }
             always {
-                publishAllure reportBuildPolicy: 'ALWAYS', results: [[path: 'target/allure-results']]
+                publishHTML(target: [
+                                reportName : 'Allure Report',
+                                reportDir  : 'target/allure-report',
+                                reportFiles: 'index.html',
+                                alwaysLinkToLastBuild: true,
+                                keepAll: true
+                            ])
             }
         }
 }
