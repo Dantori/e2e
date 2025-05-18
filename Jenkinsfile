@@ -40,13 +40,13 @@ pipeline {
                 echo '❌ Сборка завершилась с ошибками!'
             }
             always {
-                publishHTML(target: [
-                                reportName : 'Allure Report',
-                                reportDir  : 'target/allure-report',
-                                reportFiles: 'index.html',
-                                alwaysLinkToLastBuild: true,
-                                keepAll: true
-                            ])
+                allure([
+                            includeProperties: false,
+                            jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'target/allure-results']]
+                        ])
             }
         }
 }
